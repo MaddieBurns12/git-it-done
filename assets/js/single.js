@@ -1,6 +1,7 @@
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
 var repoNameEl = document.querySelector("#repo-name");
+var languageButtonsEl = document.querySelector("#language-buttons");
 
 var getRepoIssues = function(repo) {
     console.log(repo);
@@ -89,5 +90,20 @@ var displayWarning = function(repo) {
     limitWarningEl.appendChild(linkEl);
 };
 
+var buttonClickHandLer = function(event) {
+    // the event object has a target property that tells us exactly which HTML element was interacted with to create the event
+    // once we know which element we interacted with, we can use the getAttribute() method to read the data-language attribute's value assigned to that element.
+    var language = event.target.getAttribute("data-language");
+    console.log(language);
+
+    if (language) {
+        getFeaturedRepos(language);
+
+        // clear old content 
+        repoContainerEl.textContent = "";
+    }
+}
+
+languageButtonsEl.addEventListener("click", buttonClickHandLer);
 
 getRepoName();
